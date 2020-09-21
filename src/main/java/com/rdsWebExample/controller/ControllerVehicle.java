@@ -1,4 +1,4 @@
-package com.rdsWebExample.Controllers;
+package com.rdsWebExample.controller;
 
 import java.util.Map;
 
@@ -9,35 +9,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rdsWebExample.entities.Vehicle;
 import com.rdsWebExample.repository.VehicleRepository;
-import com.rdsWebExample.domain.Vehicle;
 
 
 @RestController
 public class ControllerVehicle {
-	private VehicleRepository vehicleRepo;
-
-	public ControllerVehicle(VehicleRepository vehicleRepo) {
-		super();
-		this.vehicleRepo=vehicleRepo;
+	private VehicleRepository vehicleRepository;
+	
+	public ControllerVehicle(VehicleRepository vehicleRepository) {
+		this.vehicleRepository=vehicleRepository;
 	}
 	
 	@GetMapping("/vehicles")
 	public Map<String,Vehicle> findAll(){
-		return this.vehicleRepo.findAll();		
+		System.out.println("HOLA");
+		
+		return vehicleRepository.findAll();		
 	}
 	@GetMapping("/vehicles/{id}")
 	public Vehicle findByid(@PathVariable String id) {
-		return this.vehicleRepo.findById(id);
+		
+		
+		return vehicleRepository.findById(id);
 	}
 	@PostMapping("/vehicles")
-	public void createVehicle(@RequestBody Vehicle vhcl) {
-		this.vehicleRepo.save(vhcl);
+	public void createVehicle(@RequestBody Vehicle vehicle) {
+		vehicleRepository.save(vehicle);
 	}
 	@DeleteMapping("/vehicles/{id}")
 	public void deleteVehicle(@PathVariable String id) {
-		this.vehicleRepo.delete(id);
+		vehicleRepository.delete(id);
 	}
-		
 
 }

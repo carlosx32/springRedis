@@ -8,12 +8,27 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.rdsWebExample.domain.Vehicle;
+import com.rdsWebExample.entities.Vehicle;
 
+@Configuration
+public class RedisConfiguration {
+    @Bean
+    JedisConnectionFactory jedisConnectionFactory() {
+        return new JedisConnectionFactory();
+    }
+
+    @Bean
+    RedisTemplate<String, Vehicle> redisTemplate() {
+        final RedisTemplate<String, Vehicle> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(jedisConnectionFactory());
+        return redisTemplate;
+    }
+}
+
+/*
 @Configuration //usamos la anotacion configuration
-@EnableCaching
-public class RedisConf {
-	
+public class RedisConfiguration {
+	/*
     @Value("${redis.hostname}")
     private String redisHostName;
  
@@ -22,14 +37,14 @@ public class RedisConf {
  
     @Value("${redis.prefix}")
     private String redisPrefix;
-	
+*//*	
 	
 	//cargamos los Beans
-	@Bean//permite crear la conexion a la base de datos
-	JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisHostName, redisPort);
-        return new JedisConnectionFactory(redisStandaloneConfiguration);
-	};
+    @Bean
+    JedisConnectionFactory jedisConnectionFactory() {
+        return new JedisConnectionFactory();
+    }
+
 	//Redis template key, value-> ¿que vamos a persistir?
 	@Bean
 	RedisTemplate<String,Vehicle> redisTemplate(){
@@ -41,3 +56,4 @@ public class RedisConf {
 	
 
 }
+**/

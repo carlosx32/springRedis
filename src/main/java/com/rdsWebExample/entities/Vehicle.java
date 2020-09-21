@@ -1,7 +1,8 @@
-package com.rdsWebExample.domain;
+package com.rdsWebExample.entities;
 
-public class Vehicle {
-	private int id;
+import java.io.Serializable;
+
+public class Vehicle implements Serializable  {
 	private String nombrecomercial;
 	private String Pasajeos;
 	private String Puertas;
@@ -9,9 +10,8 @@ public class Vehicle {
 	
 	
 	
-	public Vehicle(int id,String nombrecomercial, String pasajeos, String puertas, String tipo) {
-		super();
-		this.setId(id);
+	public Vehicle(String nombrecomercial, String pasajeos, String puertas, String tipo) {
+		
 		this.nombrecomercial = nombrecomercial;
 		Pasajeos = pasajeos;
 		Puertas = puertas;
@@ -44,19 +44,6 @@ public class Vehicle {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	
 
 }

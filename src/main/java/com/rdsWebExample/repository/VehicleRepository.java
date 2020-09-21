@@ -6,20 +6,23 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.data.redis.core.HashOperations;
-import com.rdsWebExample.domain.Vehicle;
 
+import com.rdsWebExample.entities.Vehicle;
+import com.rdsWebExample.repository.IRedisRepositoryVehicle;
+
+
+@Repository
 public class VehicleRepository implements IRedisRepositoryVehicle {
 	private static final String KEY="Vehicle";
 	
 	private RedisTemplate<String, Vehicle> redisTemplate;//objeto de tipo redis template(conexion con la bd)
-	private HashOperations<String, String, Vehicle> hashoperations;//interface que ejecuta las operaciónes por medio del redistemplate
+	private HashOperations hashoperations;//interface que ejecuta las operaciónes por medio del redistemplate
  	
-	
 	
 
 	public VehicleRepository(RedisTemplate<String, Vehicle> redisTemplate) {
-		super();
 		this.redisTemplate = redisTemplate;
 	}
 	
@@ -48,6 +51,4 @@ public class VehicleRepository implements IRedisRepositoryVehicle {
 	public void delete(String id) {
 		hashoperations.delete(KEY, id);
 	}
-	
-
 }
